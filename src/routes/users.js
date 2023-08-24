@@ -105,4 +105,20 @@ router.delete("/:id", async (req, res, next) => {
   }
 });
 
+// Update a user
+router.put("/:id", async (req, res, next) => {
+  const { id } = req.params;
+  const body = req.body;
+
+  try {
+    const result = await User.updateUserFromDb(id, body);
+    res.status(200).json({
+      statusCode: 200,
+      data: result,
+    });
+  } catch (error) {
+    return next(error);
+  }
+});
+
 module.exports = router;
