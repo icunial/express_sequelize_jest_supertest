@@ -91,4 +91,18 @@ router.post("/", async (req, res, next) => {
   }
 });
 
+// Delete User
+router.delete("/:id", async (req, res, next) => {
+  const { id } = req.params;
+  try {
+    const result = await usersController.deleteUserFromDbById(id);
+    res.status(200).json({
+      statusCode: 200,
+      data: result,
+    });
+  } catch (error) {
+    return next(error);
+  }
+});
+
 module.exports = router;
