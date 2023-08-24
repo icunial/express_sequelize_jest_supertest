@@ -3,6 +3,8 @@ const router = express.Router();
 
 const User = require("../models/User");
 
+const validations = require("../utils/validations");
+
 // Get user by ID
 router.get("/:id", async (req, res, next) => {
   const { id } = req.params;
@@ -47,6 +49,34 @@ router.get("/", async (req, res, next) => {
 // Create User
 router.post("/", async (req, res, next) => {
   const user = req.body;
+
+  if (validations.validateName(user.name)) {
+    return res.status(400).json({
+      statusCode: 400,
+      msg: validations.validateName(user.name),
+    });
+  }
+
+  if (validations.validateEmail(user.email)) {
+    return res.status(400).json({
+      statusCode: 400,
+      msg: validations.validateName(user.email),
+    });
+  }
+
+  if (validations.validateAge(user.age)) {
+    return res.status(400).json({
+      statusCode: 400,
+      msg: validations.validateName(user.age),
+    });
+  }
+
+  if (validations.validatesPhone(user.phone)) {
+    return res.status(400).json({
+      statusCode: 400,
+      msg: validations.validateName(user.name),
+    });
+  }
 
   try {
     const userCreated = await User.create({
