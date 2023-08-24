@@ -44,4 +44,21 @@ router.get("/", async (req, res, next) => {
   }
 });
 
+// Create User
+router.post("/", async (req, res, next) => {
+  const user = req.body;
+
+  try {
+    const userCreated = await User.create({
+      user,
+    });
+    return res.status(201).json({
+      statusCode: 201,
+      data: userCreated,
+    });
+  } catch (error) {
+    return next(new Error("Error trying to create a new user!"));
+  }
+});
+
 module.exports = router;
