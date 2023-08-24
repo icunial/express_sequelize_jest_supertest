@@ -39,7 +39,22 @@ const findUserByID = async (id) => {
   }
 };
 
+// Delete user by id
+const deleteUserFromDbById = async (id) => {
+  try {
+    const userDeleted = await User.destroy({
+      where: {
+        id,
+      },
+    });
+    return userDeleted;
+  } catch (error) {
+    throw new Error("Error trying to delete user from DB!");
+  }
+};
+
 module.exports = {
   getAllDb,
   findUserByID,
+  deleteUserFromDbById,
 };
