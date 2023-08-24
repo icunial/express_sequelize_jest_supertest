@@ -20,6 +20,26 @@ const getAllDb = async () => {
   }
 };
 
+// Get user by id
+const findUserByID = async (id) => {
+  try {
+    const dbResult = await User.findByPk(id);
+    const result = [
+      {
+        id: dbResult.id,
+        name: dbResult.name,
+        email: dbResult.email,
+        age: dbResult.age,
+        phone: dbResult.phone,
+      },
+    ];
+    return result;
+  } catch (error) {
+    throw new Error("Error trying to get a user by id");
+  }
+};
+
 module.exports = {
   getAllDb,
+  findUserByID,
 };
