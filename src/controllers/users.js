@@ -53,8 +53,27 @@ const deleteUserFromDbById = async (id) => {
   }
 };
 
+// Update a user by id
+const updateUserFromDb = async (id, body) => {
+  try {
+    const userUpdated = await User.update(
+      {
+        ...body,
+      },
+      {
+        where: {
+          id,
+        },
+      }
+    );
+  } catch (error) {
+    throw new Error("Error updating a dog!");
+  }
+};
+
 module.exports = {
   getAllDb,
   findUserByID,
   deleteUserFromDbById,
+  updateUserFromDb,
 };
