@@ -81,13 +81,14 @@ router.post("/", async (req, res, next) => {
 
   try {
     const userCreated = await User.create({
-      user,
+      ...user,
     });
     return res.status(201).json({
       statusCode: 201,
       data: userCreated,
     });
   } catch (error) {
+    console.log(error.message);
     return next(new Error("Error trying to create a new user!"));
   }
 });
