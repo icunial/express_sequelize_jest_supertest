@@ -43,13 +43,18 @@ const findUserByID = async (id) => {
 
 // Delete user by id
 const deleteUserFromDbById = async (id) => {
+  let result = [];
   try {
-    const userDeleted = await User.destroy({
-      where: {
-        id,
-      },
-    });
-    return userDeleted;
+    result = await findUserByID(id);
+    if (result.length === 1) {
+      const userDeleted = await User.destroy({
+        where: {
+          id,
+        },
+      });
+    }
+
+    return result;
   } catch (error) {
     throw new Error("Error trying to delete user from DB!");
   }
