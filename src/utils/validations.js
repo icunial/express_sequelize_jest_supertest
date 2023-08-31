@@ -22,8 +22,8 @@ const validateAge = (age) => {
 // Validates phone
 const validatesPhone = (phone) => {
   if (!phone) return "Phone parameter is missing!";
-  if (typeof phone !== "string") "Phone must be a string!";
-  if (phone.length !== 10) "Phone must contain 10 numbers";
+  if (typeof phone !== "string") return "Phone must be a string!";
+  if (phone.length !== 10) return "Phone must contain 10 numbers";
 };
 
 module.exports = {
