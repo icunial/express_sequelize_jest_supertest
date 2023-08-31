@@ -155,7 +155,7 @@ describe("POST / route", () => {
   });
 });
 
-describe("Database is not empy", () => {
+describe("Database is not empty", () => {
   it("it should return 200 status code -> Database is not empty!", async () => {
     const response = await request(app).get("/users");
     expect(response.status).toBe(200);
@@ -167,7 +167,7 @@ describe("Database is not empy", () => {
 });
 
 describe("Create a new user", () => {
-  it("Create a user", async () => {
+  it("it should return 200 status code -> Create a user", async () => {
     const user = {
       id: 2,
       name: "Name 2",
@@ -187,11 +187,13 @@ describe("Create a new user", () => {
 describe("Find User by id", () => {
   it("it should return 200 status code -> User exists", async () => {
     const response = await request(app).get("/users/1");
+    expect(response.status).toBe(200);
     expect(response.body.data.length).toBe(1);
     expect(response.body.data[0].name).toBe("Name 1");
   });
   it("it should return 200 status code -> User exists", async () => {
     const response = await request(app).get("/users/2");
+    expect(response.status).toBe(200);
     expect(response.body.data.length).toBe(1);
     expect(response.body.data[0].name).toBe("Name 2");
   });
@@ -203,7 +205,22 @@ describe("Update User by id", () => {
       name: "New Name",
     };
     const response = await request(app).put("/users/1").send(data);
+    expect(response.status).toBe(200);
     expect(response.body.data.length).toBe(1);
     expect(response.body.data[0].name).toBe("New Name");
+  });
+});
+
+describe("Delete User by id", () => {
+  it("it should return 404 status code -> User Not Found", async () => {
+    const response = await request(app).delete("/users/3");
+    expect(response.status).toBe(404);
+    expect(response.body.msg).toBe("User with ID: 3 not found!");
+  });
+  it("it should return 200 status code -> User Deleted", async () => {
+    const response = await request(app).delete("/users/2");
+    expect(response.status).toBe(200);
+    expect(response.body.data.length).toBe(1);
+    expect(response.body.data[0].name).toBe("Name 2");
   });
 });
