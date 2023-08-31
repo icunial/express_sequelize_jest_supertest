@@ -113,7 +113,7 @@ router.put("/:id", async (req, res, next) => {
   const body = req.body;
 
   try {
-    const result = await User.updateUserFromDb(id, body);
+    const result = await usersController.updateUserFromDb(id, body);
     res.status(200).json({
       statusCode: 200,
       data: result,
