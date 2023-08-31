@@ -98,6 +98,12 @@ router.delete("/:id", async (req, res, next) => {
   const { id } = req.params;
   try {
     const result = await usersController.deleteUserFromDbById(id);
+    if (!result.length) {
+      return res.status(404).json({
+        statusCode: 404,
+        msg: `User with ID: ${id} not found!`,
+      });
+    }
     res.status(200).json({
       statusCode: 200,
       data: result,
