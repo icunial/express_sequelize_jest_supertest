@@ -22,17 +22,19 @@ const getAllDb = async () => {
 
 // Get user by id
 const findUserByID = async (id) => {
+  const result = [];
   try {
     const dbResult = await User.findByPk(id);
-    const result = [
-      {
+    if (dbResult) {
+      result.push({
         id: dbResult.id,
         name: dbResult.name,
         email: dbResult.email,
         age: dbResult.age,
         phone: dbResult.phone,
-      },
-    ];
+      });
+    }
+
     return result;
   } catch (error) {
     throw new Error("Error trying to get a user by id");
@@ -66,8 +68,12 @@ const updateUserFromDb = async (id, body) => {
         },
       }
     );
+    if (userUpdated) {
+      const userFound = await findUserByID(id);
+      return userFound;
+    }
   } catch (error) {
-    throw new Error("Error updating a dog!");
+    throw new Error("Error updating a user!");
   }
 };
 
