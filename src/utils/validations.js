@@ -13,7 +13,7 @@ const validateEmail = (email) => {
 
 // Validates age
 const validateAge = (age) => {
-  if (!age) return "Age paramete is missing";
+  if (!age) return "Age parameter is missing";
   if (typeof age !== "number") return "Age must be a number!";
   if (age < 1 || age > 100) return "Age must be between 1 and 100";
   return false;
