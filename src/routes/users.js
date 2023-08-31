@@ -75,7 +75,7 @@ router.post("/", async (req, res, next) => {
   if (validations.validatesPhone(user.phone)) {
     return res.status(400).json({
       statusCode: 400,
-      msg: validations.validatesPhone(user.name),
+      msg: validations.validatesPhone(user.phone),
     });
   }
 
