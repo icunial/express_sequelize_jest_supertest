@@ -61,21 +61,21 @@ router.post("/", async (req, res, next) => {
   if (validations.validateEmail(user.email)) {
     return res.status(400).json({
       statusCode: 400,
-      msg: validations.validateName(user.email),
+      msg: validations.validateEmail(user.email),
     });
   }
 
   if (validations.validateAge(user.age)) {
     return res.status(400).json({
       statusCode: 400,
-      msg: validations.validateName(user.age),
+      msg: validations.validateAge(user.age),
     });
   }
 
   if (validations.validatesPhone(user.phone)) {
     return res.status(400).json({
       statusCode: 400,
-      msg: validations.validateName(user.name),
+      msg: validations.validatesPhone(user.name),
     });
   }
 
